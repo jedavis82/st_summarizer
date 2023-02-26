@@ -4,14 +4,6 @@ import validators
 
 from summarizer import Summarizer
 
-# API_KEY_PATH = './config/openai.key'
-# URL = 'https://www.foxnews.com/media/harry-potter-actress-defends-jk-rowlings-views-warns-about-cancel-culture-next-step-violence'
-
-
-# if __name__ == '__main__': 
-#     model = Summarizer(api_key_path=API_KEY_PATH)
-#     summary = model.summarize_page(URL)
-#     print()
 model = None 
 
 def valid_url(url: str) -> bool:
@@ -37,10 +29,9 @@ def main():
         file_bytes = StringIO(api_key_file.getvalue().decode('utf-8'))
         api_key = file_bytes.read()
         model = Summarizer(api_key=api_key)
-        # st.write(api_key)
 
         st.subheader('Compute Article Summary')
-        url_input = st.text_input('Enter URL')
+        url_input = st.text_input('Enter URL of the form: https://www.google.com/')
         if url_input: 
             if valid_url(url_input):
                 with st.spinner('Processing article...'):
@@ -52,12 +43,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    # with st.form('Compute Article Summary'): 
-    #     # url_input = st.text_input('Enter URL', on_change=url_input_change)
-
-    #     submitted = st.form_submit_button('Compute', disabled=True)
-    #     if submitted:
-    #         url = url_input
-    #         st.text(url)
-    
