@@ -65,6 +65,7 @@ def main():
         if choose == 'News Article':
             st.title('Short Summary of a News Article From a Given URL') 
             url_input = st.text_input(label='Enter URL of the form: https://www.google.com')
+            st.info('Click outside of the entry box to begin processing the article')
             if url_input != '': 
                 if valid_url(url_input): 
                     with st.spinner('Processing article...'): 
@@ -77,6 +78,7 @@ def main():
         elif choose == 'Plain Text': 
             st.title('Short Summary of a Text Snippet')
             text_to_summ = st.text_area(label='Enter the text you want to summarize')
+            st.info('Click outside of the entry area to begin processing the text')
             if text_to_summ != '': 
                 with st.spinner('Processing text...'): 
                     num_paragraphs = num_paragraphs_radio.lower()
