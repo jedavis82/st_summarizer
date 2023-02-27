@@ -18,7 +18,7 @@ def summarize_article(url: str, model: Summarizer) -> str:
     return summary 
 
 def main():
-    st.title('Summarize News Articles')
+    st.title('Short Summary of News Articles')
 
     st.header('OpenAI API Key')
     st.markdown('An API Key can be generated [here](https://platform.openai.com/account/api-keys)')
