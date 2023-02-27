@@ -10,10 +10,9 @@ class Summarizer:
     #     # There's no real way to verify the key path is valid without running the model to my knowledge
     #     openai.api_key = api_key
 
-    def __init__(self, key_file: str='./config/openai.key'):
-        with open(key_file, 'r', encoding='utf-8') as f: 
-            api_key = f.read()
-            openai.api_key = api_key 
+    def __init__(self):
+        # Hard coding this for now to test deployment stuffs. 
+        openai.api_key = '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'
     
     def summarize_from_url(self, url: str=None, num_paragraphs: str='one') -> str: 
         """
