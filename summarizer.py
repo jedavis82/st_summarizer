@@ -12,7 +12,7 @@ class Summarizer:
 
     def __init__(self):
         # Hard coding this for now to test deployment stuffs. 
-        openai.api_key = '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'
+        openai.api_key = "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"
     
     def summarize_from_url(self, url: str=None, num_paragraphs: str='one') -> str: 
         """
