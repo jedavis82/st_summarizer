@@ -5,14 +5,11 @@ Load up the OpenAI API key and pass a document through the API for summarization
 import openai 
 
 class Summarizer: 
-    # def __init__(self, api_key: str=None): 
-    #     assert api_key is not None, "Must supply a valid API key"
-    #     # There's no real way to verify the key path is valid without running the model to my knowledge
-    #     openai.api_key = api_key
+    def __init__(self, api_key: str=None): 
+         assert api_key is not None, "Must supply a valid API key"
+         # There's no real way to verify the key path is valid without running the model to my knowledge
+         openai.api_key = api_key
 
-    def __init__(self):
-        # Hard coding this for now to test deployment stuffs. 
-        openai.api_key = "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"
     
     def summarize_from_url(self, url: str=None, num_paragraphs: str='one') -> str: 
         """

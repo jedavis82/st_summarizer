@@ -51,32 +51,38 @@ def main():
     #         else: 
     #             st.error("Please supply a valid URL")
 
-    model = Summarizer()
-    with st.sidebar: 
+    with st.sidebar:
+        st.header('OpenAI API Key')
+        st.markdown('An API Key can be generated [here](https://platform.openai.com/account/api-keys)')
+        st.markdown('Your API key file should contain the generated key in plain text.')
+        st.info("Your API key will not be saved. This is required to enable the use of the OpenAI API.")
+        api_key = st.text_input('Paste your OpenAI API Key') 
         choose = st.selectbox('Choose a type of document to summarize', ("News Article", "Plain Text"))
     
-    num_paragraphs_radio = st.radio('Number of paragraphs for the summary', ('One', 'Two'))
-    if choose == 'News Article':
-        st.title('Short Summary of a News Article From a Given URL') 
-        url_input = st.text_input(label='Enter URL of the form: https://www.google.com')
-        if url_input != '': 
-            if valid_url(url_input): 
-                with st.spinner('Processing article...'): 
+    if api_key != '':
+        model = Summarizer(api_key=api_key)
+        num_paragraphs_radio = st.radio('Number of paragraphs for the summary', ('One', 'Two'))
+        if choose == 'News Article':
+            st.title('Short Summary of a News Article From a Given URL') 
+            url_input = st.text_input(label='Enter URL of the form: https://www.google.com')
+            if url_input != '': 
+                if valid_url(url_input): 
+                    with st.spinner('Processing article...'): 
+                        num_paragraphs = num_paragraphs_radio.lower()
+                        summary = summarize_news_article(url_input, num_paragraphs, model)
+                        st.markdown('### Summary')
+                        st.write(summary)
+                else: 
+                    st.error('Please supply a valid URL')
+        elif choose == 'Plain Text': 
+            st.title('Short Summary of a Text Snippet')
+            text_to_summ = st.text_area(label='Enter the text you want to summarize')
+            if text_to_summ != '': 
+                with st.spinner('Processing text...'): 
                     num_paragraphs = num_paragraphs_radio.lower()
-                    summary = summarize_news_article(url_input, num_paragraphs, model)
+                    summary = summarize_plain_text(text_to_summ, num_paragraphs, model)
                     st.markdown('### Summary')
                     st.write(summary)
-            else: 
-                st.error('Please supply a valid URL')
-    elif choose == 'Plain Text': 
-        st.title('Short Summary of a Text Snippet')
-        text_to_summ = st.text_area(label='Enter the text you want to summarize')
-        if text_to_summ != '': 
-            with st.spinner('Processing text...'): 
-                num_paragraphs = num_paragraphs_radio.lower()
-                summary = summarize_plain_text(text_to_summ, num_paragraphs, model)
-                st.markdown('### Summary')
-                st.write(summary)
 
 if __name__ == '__main__':
     main()
