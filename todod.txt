@@ -1,0 +1,3 @@
+Add in ability to summarize plain text from a text area
+
+Make an accordion on the side where you can switch between the two
